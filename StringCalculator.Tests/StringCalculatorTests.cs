@@ -76,13 +76,13 @@ namespace StringCalculator.Tests
         public void SupportDifferentDelimiters()
         {
             var calculator = new StringCalculator();
-            var expectedDelimiter = ";";
+            // var expectedDelimiter = ";";
             var expected = 3;
 
-            var actualDelimiter = calculator.IsolateDelimiter("//;\n1;2");
+            // var actualDelimiter = calculator.IsolateDelimiter("//;\n1;2");
             var actual = calculator.Add("//;\n1;2");
 
-            Assert.Equal(expectedDelimiter, actualDelimiter);
+            // Assert.Equal(expectedDelimiter, actualDelimiter);
             Assert.Equal(expected, actual);
         }
 
@@ -111,7 +111,6 @@ namespace StringCalculator.Tests
             var expected = 6;
 
             var actual = calculator.Add("//[***]\n1***2***3");
-
             Assert.Equal(expected, actual);
         }
 
@@ -122,6 +121,28 @@ namespace StringCalculator.Tests
             var expected = 6;
 
             var actual = calculator.Add("//[*][%]\n1*2%3");
+            // [ , ***, ,%, ]
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void HandleMultipleDelimitersWithLengthMoreThan1()
+        {
+            var calculator = new StringCalculator();
+            var expected = 10;
+
+            var actual = calculator.Add("//[***][#][%]\n1***2#3%4");
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void HandleDelimitersThanIncludeNumbers()
+        {
+            var calculator = new StringCalculator();
+            var expected = 6;
+
+            var actual = calculator.Add("//[*1*][%]\n1*1*2%3");
 
             Assert.Equal(expected, actual);
         }
