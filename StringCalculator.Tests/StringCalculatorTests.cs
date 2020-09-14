@@ -76,13 +76,53 @@ namespace StringCalculator.Tests
         public void SupportDifferentDelimiters()
         {
             var calculator = new StringCalculator();
-            var expectedDelimiter = ';';
+            var expectedDelimiter = ";";
             var expected = 3;
 
             var actualDelimiter = calculator.IsolateDelimiter("//;\n1;2");
             var actual = calculator.Add("//;\n1;2");
 
             Assert.Equal(expectedDelimiter, actualDelimiter);
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void ThrowExceptionForNegatives()
+        {
+            var calculator = new StringCalculator();
+            Assert.Throws<ArgumentException>(() => calculator.Add("-1,2,-3"));
+        }
+
+        [Fact]
+        public void IgnoreNumbersGreaterThanOrEqualTo1000()
+        {
+            var calculator = new StringCalculator();
+            var expected = 2;
+
+            var actual = calculator.Add("1000,1001,2");
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void AllowDelimitersOfAnyLength()
+        {
+            var calculator = new StringCalculator();
+            var expected = 6;
+
+            var actual = calculator.Add("//[***]\n1***2***3");
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void AllowMultipleDelimiters()
+        {
+            var calculator = new StringCalculator();
+            var expected = 6;
+
+            var actual = calculator.Add("//[*][%]\n1*2%3");
+
             Assert.Equal(expected, actual);
         }
     }
