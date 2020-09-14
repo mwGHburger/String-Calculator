@@ -76,13 +76,13 @@ namespace StringCalculator.Tests
         public void SupportDifferentDelimiters()
         {
             var calculator = new StringCalculator();
-            // var expectedDelimiter = ";";
+            var expectedDelimiter = ";";
             var expected = 3;
 
-            // var actualDelimiter = calculator.IsolateDelimiter("//;\n1;2");
+            var actualDelimiter = calculator.CreateDelimiterList("//;\n1;2")[2];
             var actual = calculator.Add("//;\n1;2");
 
-            // Assert.Equal(expectedDelimiter, actualDelimiter);
+            Assert.Equal(expectedDelimiter, actualDelimiter);
             Assert.Equal(expected, actual);
         }
 
@@ -91,6 +91,18 @@ namespace StringCalculator.Tests
         {
             var calculator = new StringCalculator();
             Assert.Throws<ArgumentException>(() => calculator.Add("-1,2,-3"));
+
+            try
+            {
+                calculator.Add("-1,2,-3");
+            }
+            catch(ArgumentException e)
+            {
+                var expected = "Throws exception with Negatives not allowed: -1, -3";
+                var actual = e.Message;
+
+                Assert.Equal(expected, actual);
+            }
         }
 
         [Fact]
@@ -137,7 +149,7 @@ namespace StringCalculator.Tests
         }
 
         [Fact]
-        public void HandleDelimitersThanIncludeNumbers()
+        public void HandleDelimitersThatIncludeNumbers()
         {
             var calculator = new StringCalculator();
             var expected = 6;

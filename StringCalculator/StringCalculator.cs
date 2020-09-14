@@ -10,16 +10,15 @@ namespace StringCalculator
 
         }
 
-        public int Add(string text)
+        public int Add(string stringInput)
         {
             var total = 0;
-            if (String.IsNullOrEmpty(text)) return total;
+            if (String.IsNullOrEmpty(stringInput)) return total;
 
-            if (text.Contains("//"))
+            if (stringInput.Contains("//"))
             {
-                System.Console.WriteLine("Contains //");
-                var delimiterList = CreateDelimiterList(text);
-                var stringToSum = ExtractStringToSum(text);
+                var delimiterList = CreateDelimiterList(stringInput);
+                var stringToSum = ExtractStringToSum(stringInput);
                 string[] delimiterArray = delimiterList.ToArray();
                 var stringNumbers = stringToSum.Split(delimiterArray, StringSplitOptions.None);
                 total = SumStringNumbers(stringToSum, total, delimiterArray);
@@ -28,7 +27,7 @@ namespace StringCalculator
             {
                 var delimiterList = CreateDelimiterList();
                 string[] delimiterArray = delimiterList.ToArray();
-                total = SumStringNumbers(text, total, delimiterArray);
+                total = SumStringNumbers(stringInput, total, delimiterArray);
             }
 
            return total;
@@ -36,20 +35,12 @@ namespace StringCalculator
 
         public int SumStringNumbers(string text, int total, string[] delimiterArray)
         {
-            System.Console.WriteLine("Invoke SumStringNumbersInArray method");
-            
             var stringNumbers = text.Split(delimiterArray, StringSplitOptions.None);
             var negativeStringNumbers = new List<string>();
             foreach(string number in stringNumbers)
             {
-                if (Convert.ToInt32(number) < 0)
-                {
-                    negativeStringNumbers.Add(number);
-                }
-                if (Convert.ToInt32(number) < 1000)
-                {
-                    total += Convert.ToInt32(number);
-                }
+                if (Convert.ToInt32(number) < 0) negativeStringNumbers.Add(number);
+                if (Convert.ToInt32(number) < 1000) total += Convert.ToInt32(number);
             }
 
             if (negativeStringNumbers.Count > 0)
@@ -62,7 +53,6 @@ namespace StringCalculator
 
         public List<string> CreateDelimiterList(string text = "")
         {
-            System.Console.WriteLine("Invoke IsolateDelimiter method");
             var delimiterList = new List<string>() {
                 ",",
                 "\n"
@@ -72,32 +62,26 @@ namespace StringCalculator
             {
                 return delimiterList;
             }
-            var end = text.IndexOf("\n") - 2;
-            var delimiterString = text.Substring(2,end);
+            var indexOfFirstLineBreak = text.IndexOf("\n") - 2;
+            var delimiterString = text.Substring(2,indexOfFirstLineBreak);
             if(delimiterString[0] == '[')
             {   
                 var delimiterArray = delimiterString.Split(new string[] {
-                    "][",
                     "[",
                     "]",
-                 }, StringSplitOptions.None);
-                // TODO: REFACTOR
+                }, StringSplitOptions.RemoveEmptyEntries);
                 foreach(var item in delimiterArray)
                 {
-                    if(item.Length > 0)
-                    {
-                        delimiterList.Add(item);
-                    }
+                    delimiterList.Add(item);
                 }
                 return delimiterList;
             }
-            delimiterList.Add(text.Substring(2,end));
+            delimiterList.Add(delimiterString);
             return delimiterList;
         }
 
         public string ExtractStringToSum(string text)
         {
-            System.Console.WriteLine("Invoke FormatString method");
             var end = text.IndexOf("\n") + 1;
             return text.Substring(end);
         }
