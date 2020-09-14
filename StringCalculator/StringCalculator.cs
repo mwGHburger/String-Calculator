@@ -17,24 +17,28 @@ namespace StringCalculator
 
             if (text.Contains("//"))
             {
-                var delimiter = IsolateDelimiter(text);
-                var newText = FormatString(text, delimiter);
-                string[] delimiters = CreateDelimitersArray(delimiter);
-                var stringNumbers = newText.Split(delimiters, StringSplitOptions.None);
-                total = SumStringNumbersInArray(newText, total, delimiters);
+                System.Console.WriteLine("Contains //");
+                var delimiterList = CreateDelimiterList(text);
+                var stringToSum = ExtractStringToSum(text);
+                string[] delimiterArray = delimiterList.ToArray();
+                var stringNumbers = stringToSum.Split(delimiterArray, StringSplitOptions.None);
+                total = SumStringNumbers(stringToSum, total, delimiterArray);
             }
             else
             {
-                string[] delimiters = CreateDelimitersArray();
-                total = SumStringNumbersInArray(text, total, delimiters);
+                var delimiterList = CreateDelimiterList();
+                string[] delimiterArray = delimiterList.ToArray();
+                total = SumStringNumbers(text, total, delimiterArray);
             }
 
            return total;
         }
 
-        public int SumStringNumbersInArray(string text, int total, string[] delimiters)
+        public int SumStringNumbers(string text, int total, string[] delimiterArray)
         {
-            var stringNumbers = text.Split(delimiters, StringSplitOptions.None);
+            System.Console.WriteLine("Invoke SumStringNumbersInArray method");
+            
+            var stringNumbers = text.Split(delimiterArray, StringSplitOptions.None);
             var negativeStringNumbers = new List<string>();
             foreach(string number in stringNumbers)
             {
@@ -56,41 +60,46 @@ namespace StringCalculator
             return total;
         }
 
-        public string IsolateDelimiter(string text)
+        public List<string> CreateDelimiterList(string text = "")
         {
-            var end = text.IndexOf("\n") - 2;
-            var delimiter = text.Substring(2,end);
-            if(delimiter[0] == '[')
-            {   
-                // CONVERT TO ARRAY
-                return delimiter.Substring(1, delimiter.Length - 2);
-            }
-            return text.Substring(2,end);
-        }
-
-        public string FormatString(string text, string delimiter)
-        {
-            if (delimiter.Length > 1)
-            {
-                delimiter = $"[{delimiter}]";
-            }
-            // CONVERT ARRAY INTO NEW DELIMITER
-            var newDelimiter = $"//{delimiter}\n";
-
-            return text.Split(new string[]
-                {
-                newDelimiter
-                }, StringSplitOptions.None
-            )[1];
-        }
-
-        public string[] CreateDelimitersArray(string delimiter = ",")
-        {
-            return new string[] {
+            System.Console.WriteLine("Invoke IsolateDelimiter method");
+            var delimiterList = new List<string>() {
                 ",",
-                "\n",
-                delimiter
+                "\n"
             };
+
+            if (text == "")
+            {
+                return delimiterList;
+            }
+            var end = text.IndexOf("\n") - 2;
+            var delimiterString = text.Substring(2,end);
+            if(delimiterString[0] == '[')
+            {   
+                var delimiterArray = delimiterString.Split(new string[] {
+                    "][",
+                    "[",
+                    "]",
+                 }, StringSplitOptions.None);
+                // TODO: REFACTOR
+                foreach(var item in delimiterArray)
+                {
+                    if(item.Length > 0)
+                    {
+                        delimiterList.Add(item);
+                    }
+                }
+                return delimiterList;
+            }
+            delimiterList.Add(text.Substring(2,end));
+            return delimiterList;
+        }
+
+        public string ExtractStringToSum(string text)
+        {
+            System.Console.WriteLine("Invoke FormatString method");
+            var end = text.IndexOf("\n") + 1;
+            return text.Substring(end);
         }
     }
 }
