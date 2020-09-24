@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Michael.Wang/Desktop/MYOB/Reference Kata/Language Design/String Calculator/StringCalculator/StringCalculator.csproj",
+      "projectUniqueName": "/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/String Calculator/StringCalculator/StringCalculator.csproj",
       "projectName": "StringCalculator",
-      "projectPath": "/Users/Michael.Wang/Desktop/MYOB/Reference Kata/Language Design/String Calculator/StringCalculator/StringCalculator.csproj",
+      "projectPath": "/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/String Calculator/StringCalculator/StringCalculator.csproj",
       "packagesPath": "/Users/Michael.Wang/.nuget/packages/",
-      "outputPath": "/Users/Michael.Wang/Desktop/MYOB/Reference Kata/Language Design/String Calculator/StringCalculator/obj/",
+      "outputPath": "/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/String Calculator/StringCalculator/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/Michael.Wang/.nuget/NuGet/NuGet.Config"

@@ -45,7 +45,7 @@ namespace StringCalculator
 
             if (negativeStringNumbers.Count > 0)
             {
-                throw new ArgumentException($"Throws exception with Negatives not allowed: {String.Join(", ", negativeStringNumbers)}");
+                throw new ArgumentException($"Negatives not allowed: {String.Join(", ", negativeStringNumbers)}");
             }
 
             return total;

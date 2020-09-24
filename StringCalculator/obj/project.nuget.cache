@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eyHF0q7yxaTyv4QgWRXe2CHLj2NtGcDAXQfjSTZBTweiSNTIcSKambBZGlH352Rebb4RKcye1vc9rcAtIYI99Q==",
+  "dgSpecHash": "Re2+zKL5xjLTZzf1yimEc/7XA4iyyHX3Q1nu7X4GrdORQq188CTXg5ATHYnWFGNRy6nimvBiMZ5CgFXgI7u9qg==",
   "success": true,
-  "projectFilePath": "/Users/Michael.Wang/Desktop/MYOB/Reference Kata/Language Design/String Calculator/StringCalculator/StringCalculator.csproj",
+  "projectFilePath": "/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/String Calculator/StringCalculator/StringCalculator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

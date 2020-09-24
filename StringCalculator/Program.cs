@@ -9,8 +9,8 @@ namespace StringCalculator
         static void Main(string[] args)
         {
             var cal = new StringCalculator();
-            var test = "//[*][%]\n1*2%3";
-            cal.Add(test);
+            var test = "//[1**][%]\n11**2%3";
+            System.Console.WriteLine(cal.Add(test));
 
         }
     }

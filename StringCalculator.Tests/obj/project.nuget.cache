@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wGWxLwfxMIqqRwzQNL7eUUjyGbe3Lr8TseXu6AM/xEw6ktaFS0gL89GEAXSsMgtCTVSJ/Qx9p4Gam8OEdqj+oA==",
+  "dgSpecHash": "To1acG/jBdJ5WQN/8uQ4jrkUt0/exaGoTlp6qop5UnbUDPvbPDrXBl/wwyv1ljCmmhttv9eGZb2bbJnVRr39rw==",
   "success": true,
-  "projectFilePath": "/Users/Michael.Wang/Desktop/MYOB/Reference Kata/Language Design/String Calculator/StringCalculator.Tests/StringCalculator.Tests.csproj",
+  "projectFilePath": "/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/String Calculator/StringCalculator.Tests/StringCalculator.Tests.csproj",
   "expectedPackageFiles": [
     "/Users/Michael.Wang/.nuget/packages/coverlet.collector/1.2.0/coverlet.collector.1.2.0.nupkg.sha512",
     "/Users/Michael.Wang/.nuget/packages/microsoft.codecoverage/16.5.0/microsoft.codecoverage.16.5.0.nupkg.sha512",
