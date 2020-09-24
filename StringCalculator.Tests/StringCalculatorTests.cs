@@ -29,6 +29,7 @@ namespace StringCalculator.Tests
         [Theory]
         [InlineData(3,"1,2")]
         [InlineData(8,"3,5")]
+        [InlineData(1000,"999,1")]
         public void ReturnSum_FromTwoNumber(int expected, string input)
         {
             var calcualtor = new StringCalculator();
@@ -77,27 +78,18 @@ namespace StringCalculator.Tests
         public void ThrowException_ForNegatives()
         {
             var calculator = new StringCalculator();
-            Assert.Throws<ArgumentException>(() => calculator.Add("-1,2,-3"));
-
-            try
-            {
-                calculator.Add("-1,2,-3");
-            }
-            catch(ArgumentException e)
-            {
-                var expected = "Throws exception with Negatives not allowed: -1, -3";
-                var actual = e.Message;
-                Assert.Equal(expected, actual);
-            }
+            var ex = Assert.Throws<ArgumentException>(() => calculator.Add("-1,2,-3"));
+            Assert.Equal("Negatives not allowed: -1, -3", ex.Message);
         }
 
-        [Fact]
-        public void IgnoreNumbers_GreaterThanOrEqualTo1000()
+        [Theory]
+        [InlineData(2,"1000,1001,2")]
+        [InlineData(1000,"999,1")]
+        public void IgnoreNumbers_GreaterThanOrEqualTo1000(int expected, string input)
         {
             var calculator = new StringCalculator();
-            var expected = 2;
 
-            var actual = calculator.Add("1000,1001,2");
+            var actual = calculator.Add(input);
 
             Assert.Equal(expected, actual);
         }
@@ -134,13 +126,14 @@ namespace StringCalculator.Tests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void HandleDelimiters_ThatIncludeNumbers()
+        [Theory]
+        [InlineData(6,"//[*1*][%]\n1*1*2%3")]
+        [InlineData(6,"//[1**][%]\n11**2%3")]
+        public void HandleDelimiters_ThatIncludeNumbers(int expected, string input)
         {
             var calculator = new StringCalculator();
-            var expected = 6;
 
-            var actual = calculator.Add("//[*1*][%]\n1*1*2%3");
+            var actual = calculator.Add(input);
 
             Assert.Equal(expected, actual);
         }
